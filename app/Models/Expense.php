@@ -42,4 +42,14 @@ class Expense extends Model
     {
         return $this->belongsTo(Budget::class);
     }
+
+    /**
+     * Get the trip that owns the Expense
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
+    public function trip()
+    {
+        return $this->hasOneThrough(Trip::class, Budget::class);
+    }
 }

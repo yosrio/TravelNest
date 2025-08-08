@@ -40,4 +40,14 @@ class Budget extends Model
     {
         return $this->belongsTo(Trip::class);
     }
+
+    /**
+     * The expenses that belong to this budget.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
 }

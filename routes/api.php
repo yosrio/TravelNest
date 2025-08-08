@@ -11,3 +11,4 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/password/forgot', [AuthController::class, 'forgotPassword']);
 Route::post('/auth/password/reset', [AuthController::class, 'resetPassword']);
+Route::middleware('auth:sanctum')->post('/auth/logout', [AuthController::class, 'logout']);

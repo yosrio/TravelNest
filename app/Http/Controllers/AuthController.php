@@ -142,4 +142,21 @@ class AuthController extends Controller
             'message' => 'Password has been reset successfully.'
         ]);
     }
+
+    /**
+     * Logs out the user and deletes their personal access token.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Logged out successfully.'
+        ]);
+    }
 }

@@ -11,12 +11,16 @@ Route::post('/register', function (Request $request) {
         'name' => 'required|string',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6',
+        'profile_photo' => 'nullable|string',
+        'bio' => 'nullable|string',
     ]);
 
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => bcrypt($request->password),
+        'password' => Hash::make($request->password),
+        'profile_photo' => $request->profile_photo,
+        'bio' => $request->bio,
     ]);
 
     return response()->json(['message' => 'Registered successfully']);
@@ -40,7 +44,7 @@ Route::post('/login', function (Request $request) {
 
     return response()->json([
         'token' => $token,
-        'user' => $user,
+        'user' => $user->only(['id', 'name', 'email', 'profile_photo', 'bio', 'role']),
     ]);
 });
 

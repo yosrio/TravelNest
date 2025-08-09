@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Laravel\Sanctum\Sanctum;
+use App\Models\User;
 use Tests\TestCase;
 
-class ProfileTest extends TestCase
+class UserProfileTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -26,12 +28,9 @@ class ProfileTest extends TestCase
 
         $response->assertOk()
             ->assertJson([
-                'status' => 'success',
-                'data' => [
-                    'name' => 'John Doe',
-                    'bio' => 'Hello World',
-                    'profile_photo' => '/storage/profile_photos/sample.jpg',
-                ]
+                'name' => 'John Doe',
+                'bio' => 'Hello World',
+                'profile_photo' => '/storage/profile_photos/sample.jpg',
             ]);
     }
 
@@ -70,7 +69,7 @@ class ProfileTest extends TestCase
     #[Test]
     public function guest_cannot_access_profile_endpoints()
     {
-        $this->getJson('/user/profile')->assertUnauthorized();
-        $this->putJson('/user/profile', [])->assertUnauthorized();
+        $this->getJson('/api/user/profile')->assertUnauthorized();
+        $this->putJson('/api/user/profile', [])->assertUnauthorized();
     }
 }

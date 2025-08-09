@@ -20,7 +20,7 @@ class AuthRegisterTest extends TestCase
             'password' => 'password123'
         ];
 
-        $response = $this->postJson('/api/auth/register', $payload);
+        $response = $this->postJson('/api/register', $payload);
 
         $response->assertStatus(201)
                  ->assertJson([
@@ -46,7 +46,7 @@ class AuthRegisterTest extends TestCase
             'password' => 'short'
         ];
 
-        $response = $this->postJson('/api/auth/register', $payload);
+        $response = $this->postJson('/api/register', $payload);
 
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['name', 'email', 'password']);
@@ -63,7 +63,7 @@ class AuthRegisterTest extends TestCase
             'password' => 'password123'
         ];
 
-        $response = $this->postJson('/api/auth/register', $payload);
+        $response = $this->postJson('/api/register', $payload);
 
         $response->assertStatus(422)
                  ->assertJsonValidationErrors(['email']);

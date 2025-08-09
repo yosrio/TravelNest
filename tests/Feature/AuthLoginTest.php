@@ -25,7 +25,7 @@ class AuthLoginTest extends TestCase
             'password' => 'password123'
         ];
 
-        $response = $this->postJson('/api/auth/login', $payload);
+        $response = $this->postJson('/api/login', $payload);
 
         $response->assertStatus(200)
                  ->assertJsonStructure([
@@ -53,7 +53,7 @@ class AuthLoginTest extends TestCase
             'password' => 'wrongpassword'
         ];
 
-        $response = $this->postJson('/api/auth/login', $payload);
+        $response = $this->postJson('/api/login', $payload);
 
         $response->assertStatus(401)
                  ->assertJson([
@@ -70,7 +70,7 @@ class AuthLoginTest extends TestCase
             'password' => 'password123'
         ];
 
-        $response = $this->postJson('/api/auth/login', $payload);
+        $response = $this->postJson('/api/login', $payload);
 
         $response->assertStatus(401)
                  ->assertJson([

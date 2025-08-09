@@ -19,7 +19,7 @@ class AuthLogoutTest extends TestCase
 
         Sanctum::actingAs($user);
 
-        $response = $this->postJson('/api/auth/logout');
+        $response = $this->postJson('/api/logout');
 
         $response->assertStatus(200)
                  ->assertJson([
@@ -33,7 +33,7 @@ class AuthLogoutTest extends TestCase
     #[Test]
     public function guest_cannot_access_logout_endpoint()
     {
-        $response = $this->postJson('/api/auth/logout');
+        $response = $this->postJson('/api/logout');
 
         $response->assertStatus(401);
     }

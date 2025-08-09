@@ -21,7 +21,7 @@ class AuthPasswordResetTest extends TestCase
 
         $user = User::factory()->create(['email' => 'john@example.com']);
 
-        $response = $this->postJson('/api/auth/password/forgot', [
+        $response = $this->postJson('/api/password/forgot', [
             'email' => 'john@example.com',
         ]);
 
@@ -43,7 +43,7 @@ class AuthPasswordResetTest extends TestCase
     {
         Mail::fake();
 
-        $response = $this->postJson('/api/auth/password/forgot', [
+        $response = $this->postJson('/api/password/forgot', [
             'email' => 'notfound@example.com',
         ]);
 
@@ -70,7 +70,7 @@ class AuthPasswordResetTest extends TestCase
             'created_at' => now(),
         ]);
 
-        $response = $this->postJson('/api/auth/password/reset', [
+        $response = $this->postJson('/api/password/reset', [
             'email' => $user->email,
             'token' => $token,
             'password' => 'newpassword123',
@@ -95,7 +95,7 @@ class AuthPasswordResetTest extends TestCase
             'password' => bcrypt('oldpassword'),
         ]);
 
-        $response = $this->postJson('/api/auth/password/reset', [
+        $response = $this->postJson('/api/password/reset', [
             'email' => $user->email,
             'token' => 'invalid-token',
             'password' => 'newpassword123',
@@ -125,7 +125,7 @@ class AuthPasswordResetTest extends TestCase
             'created_at' => now()->subHours(2), // token expired (more than 60 min)
         ]);
 
-        $response = $this->postJson('/api/auth/password/reset', [
+        $response = $this->postJson('/api/password/reset', [
             'email' => $user->email,
             'token' => $token,
             'password' => 'newpassword123',

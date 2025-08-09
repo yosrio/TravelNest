@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Rest;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
@@ -16,8 +16,14 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetPasswordMail;
 
-class AuthController extends Controller
+class AuthController extends \App\Http\Controllers\Controller
 {
+    /**
+     * Registers a new user and returns a JSON response.
+     *
+     * @param RegisterRequest $request
+     * @return JsonResponse
+     */
     public function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create([

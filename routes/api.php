@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Rest\AuthController;
 use App\Http\Controllers\Rest\ProfileController;
+use App\Http\Controllers\Rest\DashboardController;
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
@@ -15,4 +16,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user/profile', [ProfileController::class, 'show']);
     Route::put('/user/profile', [ProfileController::class, 'update']);
+
+    Route::get('/user/dashboard', [DashboardController::class, 'index']);
 });
